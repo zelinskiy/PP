@@ -1,0 +1,19 @@
+cabal: Entering directory '/tmp/cabal-tmp-4246/random-1.1'
+Configuring random-1.1...
+Building random-1.1...
+Preprocessing library random-1.1...
+[1 of 1] Compiling System.Random    ( System/Random.hs, dist/dist-sandbox-f3d14d82/build/System/Random.o )
+
+System/Random.hs:43:1: warning: [-Wtabs]
+    Tab character found here, and in 74 further locations.
+    Please use spaces instead.
+Creating package registration file: /tmp/pkgConf-random-17833686901102520059.1
+Installing library in
+/home/nik/projects/PP/lab1/.cabal-sandbox/lib/x86_64-linux-ghc-8.0.2/random-1.1-9tceXaeYIMZ4JrKq20Egog
+Warning: Unable to strip executable or library
+'libHSrandom-1.1-9tceXaeYIMZ4JrKq20Egog' (missing the 'strip' program)
+Warning: Unable to strip executable or library
+'libHSrandom-1.1-9tceXaeYIMZ4JrKq20Egog-ghc8.0.2' (missing the 'strip'
+program)
+Registering random-1.1...
+cabal: Leaving directory '/tmp/cabal-tmp-4246/random-1.1'

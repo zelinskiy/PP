@@ -1,0 +1,21 @@
+cabal: Entering directory '/tmp/cabal-tmp-3185/clock-0.7.2'
+Configuring clock-0.7.2...
+Building clock-0.7.2...
+Preprocessing library clock-0.7.2...
+Clock.hsc:44:0: warning: "hsc_alignment" redefined
+In file included from dist/dist-sandbox-f3d14d82/build/System/Clock_hsc_make.c:1:0:
+/nix/store/xczvw3rlvr1ind8s88i7yx0vasl4gzxm-ghc-8.0.2/lib/ghc-8.0.2/template-hsc.h:88:0: note: this is the location of the previous definition
+ #define hsc_alignment(t...) \
+ ^
+[1 of 1] Compiling System.Clock     ( dist/dist-sandbox-f3d14d82/build/System/Clock.hs, dist/dist-sandbox-f3d14d82/build/System/Clock.o )
+Creating package registration file:
+/tmp/pkgConf-clock-0.77833686901102520059.2
+Installing library in
+/home/nik/projects/PP/lab1/.cabal-sandbox/lib/x86_64-linux-ghc-8.0.2/clock-0.7.2-6ZjQ4liQAtMEQ8sxJKD0xY
+Warning: Unable to strip executable or library
+'libHSclock-0.7.2-6ZjQ4liQAtMEQ8sxJKD0xY' (missing the 'strip' program)
+Warning: Unable to strip executable or library
+'libHSclock-0.7.2-6ZjQ4liQAtMEQ8sxJKD0xY-ghc8.0.2' (missing the 'strip'
+program)
+Registering clock-0.7.2...
+cabal: Leaving directory '/tmp/cabal-tmp-3185/clock-0.7.2'
