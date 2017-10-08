@@ -7,13 +7,6 @@
   (major1) == 0 && (major2) <  1 || \
   (major1) == 0 && (major2) == 1 && (minor) <= 0)
 
-/* package array-0.5.1.1 */
-#define VERSION_array "0.5.1.1"
-#define MIN_VERSION_array(major1,major2,minor) (\
-  (major1) <  0 || \
-  (major1) == 0 && (major2) <  5 || \
-  (major1) == 0 && (major2) == 5 && (minor) <= 1)
-
 /* package base-4.9.1.0 */
 #define VERSION_base "4.9.1.0"
 #define MIN_VERSION_base(major1,major2,minor) (\
@@ -27,13 +20,6 @@
   (major1) <  0 || \
   (major1) == 0 && (major2) <  7 || \
   (major1) == 0 && (major2) == 7 && (minor) <= 2)
-
-/* package criterion-1.2.2.0 */
-#define VERSION_criterion "1.2.2.0"
-#define MIN_VERSION_criterion(major1,major2,minor) (\
-  (major1) <  1 || \
-  (major1) == 1 && (major2) <  2 || \
-  (major1) == 1 && (major2) == 2 && (minor) <= 2)
 
 /* package deepseq-1.4.2.0 */
 #define VERSION_deepseq "1.4.2.0"
@@ -56,12 +42,12 @@
   (major1) == 1 && (major2) <  1 || \
   (major1) == 1 && (major2) == 1 && (minor) <= 0)
 
-/* package vector-0.12.0.1 */
-#define VERSION_vector "0.12.0.1"
-#define MIN_VERSION_vector(major1,major2,minor) (\
-  (major1) <  0 || \
-  (major1) == 0 && (major2) <  12 || \
-  (major1) == 0 && (major2) == 12 && (minor) <= 0)
+/* package rdtsc-1.3.0.1 */
+#define VERSION_rdtsc "1.3.0.1"
+#define MIN_VERSION_rdtsc(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  3 || \
+  (major1) == 1 && (major2) == 3 && (minor) <= 0)
 
 /* tool gcc-5.4.0 */
 #define TOOL_VERSION_gcc "5.4.0"

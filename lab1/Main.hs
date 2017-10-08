@@ -4,39 +4,55 @@
 {-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
---{-# OPTIONS_GHC -Wall #-}
-
 import System.Random
 import System.Clock
 import Control.DeepSeq
-import Data.Array
 import Numeric
 import Data.Int
 import Data.Typeable
 import Data.List
+import Data.Matrix
+import System.CPUTime.Rdtsc
 
-clocks = [
-  Monotonic
-  , Realtime
-  , ProcessCPUTime
-  , ThreadCPUTime
-  , MonotonicRaw
-  , Boottime
+main :: IO ()
+main = do
+  g <- getStdGen
+  let c = Monotonic
+  mapM_ (\t -> t g c) tasks
+  --task9 g c
+  putStrLn "OK"
+
+-- +RTS -N4 -s -ls
+
+tasks :: [Task]
+tasks =
+  [ task1
+  , task2
+  , task3
+--, task4
+  , task7
+  , task9
   ]
+
+clocks =
+  [
+  --Тикает с момента запуска системы. Значение произвольное (время с запуска, эпоха юникс и тд).
+    Monotonic
+  --Системные часы (в юникс эпохе)
+  , Realtime
+  --Процессорные часы, связанные с текущим процессом. Тикают с запуска процесса
+  , ProcessCPUTime
+  --То же, но для потоков
+  , ThreadCPUTime
+  ]
+
+type Task = StdGen -> Clock -> IO ()
 
 printTimeSpec :: Clock -> TimeSpec -> IO ()
 printTimeSpec c t =
   putStrLn $ show c ++ ": "
   ++ showFFloat Nothing ms "" ++ "ms"
   where ms = fromIntegral (nsec t) / 10^6
-    
-
-main :: IO ()
-main = do
-  g <- getStdGen
-  
-  task7NoRandom g Realtime
-  putStrLn "OK"
 
 -- # TASK 1 #
 
@@ -48,8 +64,9 @@ main = do
 -- Что бы это ни было, я могу затo взамен
 -- определить просто текущее значение часов
 
-task1 :: RandomGen r => r -> Clock -> IO ()
+task1 :: Task
 task1 g c = do
+  putStrLn "\n\nTASK 1\n"
   !t <- getTime c
   printTimeSpec c t
 
@@ -71,8 +88,12 @@ task1 g c = do
 -- використанню різних функцій.
 
 -- | Меряем время a, затем пока a /= b меряем b
-task2 :: Clock -> IO ()
-task2 c = do
+task2 :: Task
+task2 g c = do
+  putStrLn "\n\nTASK 2\n"
+  mapM_ (task2' g) clocks
+
+task2' g c = do
   let go a b = do
         let !diff = diffTimeSpec a b
         if diff == TimeSpec 0 0
@@ -82,6 +103,7 @@ task2 c = do
   !res <- go a a
   printTimeSpec c res
 
+-- # TASK 3 #
 
 -- Перевірте використання
 -- {асемблерних вставок},
@@ -93,23 +115,55 @@ task2 c = do
 -- [3]: Для виконання цього пункту можна
 -- зробити 10 вимірів та обрати мінімальне.
 
-
--- ! Здесь явно рандомные числа не меняются
-task3 :: RandomGen r => r -> Clock -> IO ()
+task3 :: Task
 task3 g c = do
+  putStrLn "\n\nTASK 3\n"
+  mapM_ (task3' g) clocks
+  task3Rdtsc g
+
+task3Rdtsc g = do
+  let measure g = do
+        let inputs = take 1000 (randoms g :: [Int])
+        t1 <- inputs `deepseq` rdtsc
+        let s = sum inputs
+        t2 <- s `deepseq` rdtsc
+        return $ t1 - t2
+  
   res <- fmap minimum $
          sequence $
          replicate 10 $
-         measure
-  printTimeSpec c res
-    where
-      measure = do
+         measure g
+  putStrLn $ "rdtsc: " ++ show res ++ " cycles"
+  
+task3' g c = do
+  let measure g c = do
         let inputs = take 1000 (randoms g :: [Int])
         t1 <- inputs `deepseq` getTime c
-        let s = sum $ inputs
+        let s = sum inputs
         t2 <- s `deepseq` getTime c
         let delta = diffTimeSpec t1 t2
         return delta
+  
+  res <- fmap minimum $
+         sequence $
+         replicate 10 $
+         measure g c
+  printTimeSpec c res
+  
+    
+-- # TASK 4 #
+
+-- Для задачі додавання масиву чисел розміром
+-- 100000, 200000, 300000 елементів
+-- використайте абсолютний та відносний вимір часу.
+-- Для абсолютного виміру використовувати функцію
+-- omp_get_wtime. Для відносного визначте
+-- кількість циклів додавання , які можна виконати
+-- за 2 с для кожного розміру. Вимір виконувати
+-- функцією GetTickCount. Порівняйте відношення
+-- часу T(200000)/T (100000), T(300000)/T (100000)
+-- для обох методів. Зробить висновки по можливості
+-- використання відносного виміру часу.
 
 -- # TASK 5 #
 
@@ -118,15 +172,11 @@ task3 g c = do
 -- Перша функція не використовує об’єкти,
 -- інша використовує.
 
-mmult :: (Ix i, Num a) => Array (i,i) a -> Array (i,i) a -> Array (i,i) a 
-mmult a b = array ((x0,y1),(x0',y1')) c
-  where
-    ((x0,x1),(x0',x1')) = bounds a
-    ((y0,y1),(y0',y1')) = bounds b
-    ir = range (x0,x0')
-    jr = range (y1,y1')
-    kr = range (x1,x1')
-    c = [((i,j), foldl' (+) 0 [a!(i,k) * b!(k,j) | k <- kr]) | i <- ir, j <- jr]
+mmult :: Num a => Matrix a -> Matrix a -> Matrix a 
+mmult a b =
+  matrix n n (\(i, j) -> foldl' (+) 0
+              [a!(i,k) * b!(k,j) | k <- [1..n]])
+  where n = nrows a
 
 -- # TASK 6 #
 
@@ -142,7 +192,8 @@ mmult a b = array ((x0,y1),(x0',y1')) c
 -- Сравните с латехом:
 -- $c_{ij} = \sum_{k=1}^{n}{a_{ik}b_{kj}}$
 
--- Нетрудно видеть, что на каждом шаге внешнего генератора происходит _ вызовов sum.
+-- Нетрудно видеть, что на каждом шаге внешнего
+-- генератора происходит _ вызовов sum.
 
 -- # TASK 7 #
 
@@ -159,18 +210,14 @@ mmult a b = array ((x0,y1),(x0',y1')) c
 class Semigroup s where
   splus :: s -> s -> s
 
-newtype (Ix i, Num a) => Matrix i a =
-  MkMatrix {unMatrix :: (Array (i,i) a)}
+newtype (Num a) => MyMatrix a =
+  MkMyMatrix {unMyMatrix :: Matrix a}
   deriving (Show, Eq, NFData)
 
-instance (Ix i, Num a) => Semigroup (Matrix i a) where
+-- А MyMatrix её экземпляром
+instance (Num a) => Semigroup (MyMatrix a) where
   a `splus` b =
-    MkMatrix $ unMatrix a `mmult` unMatrix b
-
-test0 =
-  (MkMatrix $ listArray ((0,0),(1,1)) (repeat 5))
-  `splus`
-  (MkMatrix $ listArray ((0,0),(1,1)) (repeat 10))
+    MkMyMatrix $ (unMyMatrix a) `mmult` unMyMatrix b
 
 data Task7Mode = NoObjects | WithObjects
 
@@ -178,39 +225,28 @@ instance Show Task7Mode where
   show NoObjects = "Without objects"
   show WithObjects = "With objects"
 
-task7NoRandom g c = 
-  mapM_ (\(m,s) -> do
-    task7' m (repeat 13 :: [Int64]) s c
-    task7' m (repeat 13 :: [Int32]) s c
-    task7' m (repeat 13 :: [Int16]) s c
-    task7' m (repeat 13 :: [Int8 ]) s c)
-  [(m, fromIntegral (2^s)) |
-   m <- [NoObjects, WithObjects],
-   s <- [4..11]]
+task7 :: Task
+task7 g c = do
+  putStrLn "\n\nTASK 7\n"
+  let rs = randomRs (1,100) g :: [Int64]
+  let rs0 = repeat (4::Int8)
+  mapM_ (\(m, s) -> task7' m rs s c)
+    [(m,s) | m <- [NoObjects, WithObjects],
+             s <- [128,256,512]]
 
-task7 :: RandomGen r => r -> Clock -> IO ()
-task7 g c = 
-  mapM_ (\(ob,s) -> do
-    task7' ob (randomRs (1,32) g :: [Int64]) s c
-    task7' ob (randomRs (1,32) g :: [Int32]) s c
-    task7' ob (randomRs (1,32) g :: [Int16]) s c
-    task7' ob (randomRs (1,32) g :: [Int8 ]) s c)
-  [(ob, fromIntegral (2^s)) |
-   ob <- [NoObjects, WithObjects],
-   s <- [4..9]]
-
-task7' :: (Typeable a, NFData a, Integral a, Show a) =>
+task7' :: (Typeable a, NFData a, Num a, Show a)
+  =>
   Task7Mode -> [a] -> Int -> Clock -> IO ()
 task7' mode rs s c = do
-  let m1 = listArray ((0,0),(s-1,s-1)) rs
-      rs' = drop (s*s) rs
-      m2 = listArray ((0,0),(s-1,s-1)) rs'
+  let m1 = fromList s s rs
+      rs'= drop (s*s) rs
+      m2 = fromList s s rs
   t1 <- (m1,m2) `deepseq` getTime c
-  let m3 = case mode of
-        NoObjects ->
-          m1 `mmult` m2
-        WithObjects ->
-          unMatrix $ MkMatrix m1 `splus` MkMatrix m2
+  let m3 =
+        case mode of
+          NoObjects -> m1 `mmult` m2
+          WithObjects -> unMyMatrix $
+            MkMyMatrix m1 `splus` MkMyMatrix m2
   t2 <- m3 `deepseq` getTime c
   let delta = diffTimeSpec t1 t2
   print mode
@@ -218,3 +254,61 @@ task7' mode rs s c = do
   putStrLn $ "Array size: " ++ show s
   printTimeSpec c delta
   putStrLn ""
+
+-- # TASK 8 #
+
+-- Задайте режим Release при виконанні додатків
+-- і виконайте попередній пункт. Поясніть отримані
+-- результати.
+
+-- {-# OPTIONS_GHC -debug #-}
+-- Debug = 44.001/43.889/0.110
+-- Release = 44.173/44.039/0.132
+
+-- Объяснение: DING-DONG, WELCOME TO THE RICE FIELDS
+
+-- # TASK 9 #
+
+-- Дослідіть вплив типу даних
+-- (int8, int16, int32, __int64, float, double)
+-- для розміру матриць n = 1024. Отримані
+-- результати занести в таблицю. Зробіть
+-- висновки по впливу типу даних.
+
+task9 :: Task
+task9 g c = do
+  putStrLn "\n\nTASK 9\n"
+  let s = 128
+  task7' NoObjects (randomRs (1,32) g::[Int8  ]) s c
+  task7' NoObjects (randomRs (1,32) g::[Int16 ]) s c
+  task7' NoObjects (randomRs (1,32) g::[Int32 ]) s c
+  task7' NoObjects (randomRs (1,32) g::[Int64 ]) s c
+  task7' NoObjects (randomRs (1,32) g::[Float ]) s c
+  task7' NoObjects (randomRs (1,32) g::[Double]) s c
+
+-- # TASK 10 #
+
+-- Якщо є технічна можливість, виконайте пункт 9
+-- за допомогою засобів Performance для Visual Studio.
+
+-- Есть только ТредСкуп
+
+-- # QUESTONS #
+
+-- 1) В залежності від чого обираються функції
+-- для виміру часу.
+-- Удобства использования, точности, длительности
+-- замера
+
+-- 2) Що таке абсолютний та відносний вимір часу.
+-- Абсолютный = omp_get_wtime
+-- Относительный = замеряем число однотипных операций -- например за 2 секунды
+
+-- 3) Які функції забезпечують найбільшу точність.
+
+-- 4) Чому не можна використовувати функцію __rdtsc
+-- для виміру часу для багатоядерних процесорів.
+-- мб тому що на каждом ядре свой тактовый генератор
+
+-- 5) Які методи виміру часу для багатоядерних
+-- процесорів ви знаєте?
