@@ -24,6 +24,7 @@ main = do
 
 -- +RTS -N4 -s -ls
 
+
 tasks :: [Task]
 tasks =
   [ task1
@@ -36,7 +37,9 @@ tasks =
 
 clocks =
   [
-  --Тикает с момента запуска системы. Значение произвольное (время с запуска, эпоха юникс и тд).
+  -- Тикает с момента запуска системы.
+  -- Значение произвольное (время с запуска,
+  -- эпоха юникс и тд). Разрешение 20мс.
     Monotonic
   --Системные часы (в юникс эпохе)
   , Realtime
@@ -45,6 +48,15 @@ clocks =
   --То же, но для потоков
   , ThreadCPUTime
   ]
+{-
+Ignore this
+clock_gettime(CLOCK_MONOTONIC_RAW)       100ns/call
+clock_gettime(CLOCK_MONOTONIC)           25ns/call
+clock_gettime(CLOCK_REALTIME)            25ns/call
+clock_gettime(CLOCK_PROCESS_CPUTIME_ID)  400ns/call
+rdtsc (implementation @DavidSchwarz)     600ns/call
+-}
+
 
 type Task = StdGen -> Clock -> IO ()
 
