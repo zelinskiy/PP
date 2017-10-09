@@ -19,7 +19,7 @@ main = do
   g <- getStdGen
   let c = Monotonic
   mapM_ (\t -> t g c) tasks
-  --task9 g c
+--  task4 g c
   putStrLn "OK"
 
 -- +RTS -N4 -s -ls
@@ -30,7 +30,7 @@ tasks =
   [ task1
   , task2
   , task3
---, task4
+  , task4
   , task7
   , task9
   ]
@@ -151,7 +151,7 @@ task3' g c = do
   let measure g c = do
         let inputs = take 1000 (randoms g :: [Int])
         t1 <- inputs `deepseq` getTime c
-        let s = sum inputs
+        let s = foldl' (+) 0 inputs
         t2 <- s `deepseq` getTime c
         let delta = diffTimeSpec t1 t2
         return delta
@@ -176,6 +176,41 @@ task3' g c = do
 -- часу T(200000)/T (100000), T(300000)/T (100000)
 -- для обох методів. Зробить висновки по можливості
 -- використання відносного виміру часу.
+
+data Task4Mode = Absolute | Relative
+  deriving Show
+
+task4 :: Task
+task4 g c = do
+  putStrLn "\n\nTASK 4\n"
+  let c = Monotonic
+  a <- addsPerSec c
+  mapM_ (\(m,n) -> do
+    putStrLn $ show m ++ " measurement for " ++ show n
+    t <- task4' m n a g c
+    printTimeSpec c t)
+    [(m,n) | m <- [Absolute, Relative],
+      n <- [100000, 200000, 300000]]
+
+task4' Relative n a _ _ = do
+  let ns = round $ (fromIntegral n / fromIntegral a) * 10^9
+  return $ TimeSpec (ns `div` 10^9) ns
+task4' Absolute n _ g c = do
+  let inputs = take n (randoms g :: [Int])
+  !t1 <- getTime c
+  let !s = foldl' (+) 0 inputs
+  !t2 <- getTime c
+  return $ diffTimeSpec t1 t2
+  
+addsPerSec :: Clock -> IO Int64
+addsPerSec c = getTime c >>= (\t0 -> run t0 0 t0)
+  where
+    run t0 n t = do
+      let n' = n + 1
+      !t' <- getTime c
+      if diffTimeSpec t0 t' >= TimeSpec 2 0
+      then return $ n' `div` 2
+      else run t0 n' t'
 
 -- # TASK 5 #
 
@@ -324,3 +359,7 @@ task9 g c = do
 
 -- 5) Які методи виміру часу для багатоядерних
 -- процесорів ви знаєте?
+
+-- Висновок:
+-- 1) Haskell is retarded.
+-- 2) I Wish I'd knew any other language(((
