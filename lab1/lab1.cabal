@@ -19,7 +19,7 @@ executable lab1
   main-is:             Main.hs
   -- other-modules:       
   other-extensions:
-  ghc-options: -O4 -funbox-strict-fields -eventlog -rtsopts -threaded 
+  ghc-options: -O4 -funbox-strict-fields -eventlog -rtsopts -fllvm
   
   build-depends:       base >=4.9 && <4.10
                      , clock
