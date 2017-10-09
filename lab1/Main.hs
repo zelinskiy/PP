@@ -184,11 +184,7 @@ task4 :: Task
 task4 g c = do
   putStrLn "\n\nTASK 4\n"
   let c = Monotonic
-<<<<<<< HEAD
-  a <- addsPerSec Monotonic
-=======
   a <- addsPerSec c
->>>>>>> 7c81dbc1ee0e55e87b89676ec2afde09274c9c61
   mapM_ (\(m,n) -> do
     putStrLn $ show m ++ " measurement for " ++ show n
     t <- task4' m n a g c
@@ -197,7 +193,6 @@ task4 g c = do
       n <- [100000, 200000, 300000]]
 
 task4' Relative n a _ _ = do
-<<<<<<< HEAD
   let ns = round $ fromIntegral n / fromIntegral a * 10^9
   return $ TimeSpec (ns `div` 10^9) ns 
 task4' Absolute n _ g c = do
@@ -205,15 +200,6 @@ task4' Absolute n _ g c = do
   t1 <- inputs `deepseq` getTime c
   let s = foldl' (+) 0 inputs
   t2 <- s `deepseq` getTime c
-=======
-  let ns = round $ (fromIntegral n / fromIntegral a) * 10^9
-  return $ TimeSpec (ns `div` 10^9) ns
-task4' Absolute n _ g c = do
-  let inputs = take n (randoms g :: [Int])
-  !t1 <- getTime c
-  let !s = foldl' (+) 0 inputs
-  !t2 <- getTime c
->>>>>>> 7c81dbc1ee0e55e87b89676ec2afde09274c9c61
   return $ diffTimeSpec t1 t2
   
 addsPerSec :: Clock -> IO Int64
@@ -221,11 +207,7 @@ addsPerSec c = getTime c >>= (\t0 -> run t0 0 t0)
   where
     run t0 n t = do
       let n' = n + 1
-<<<<<<< HEAD
       t' <- n' `deepseq` getTime c
-=======
-      !t' <- getTime c
->>>>>>> 7c81dbc1ee0e55e87b89676ec2afde09274c9c61
       if diffTimeSpec t0 t' >= TimeSpec 2 0
       then return $ n' `div` 2
       else run t0 n' t'
