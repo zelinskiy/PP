@@ -1,0 +1,975 @@
+Configuring primitive-simd-0.1.0.0...
+Building primitive-simd-0.1.0.0...
+Preprocessing library primitive-simd-0.1.0.0...
+[ 1 of 33] Compiling Data.Primitive.SIMD.Class ( src-128/Data/Primitive/SIMD/Class.hs, .stack-work/dist/x86_64-linux/Cabal-1.24.2.0/build/Data/Primitive/SIMD/Class.o )
+[ 2 of 33] Compiling Data.Primitive.SIMD.DoubleX16 ( src-128/Data/Primitive/SIMD/DoubleX16.hs, .stack-work/dist/x86_64-linux/Cabal-1.24.2.0/build/Data/Primitive/SIMD/DoubleX16.o )
+
+src-128/Data/Primitive/SIMD/DoubleX16.hs:215:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector abs" may never fire
+      because rule "Class op abs" for ‘abs’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX16.hs:216:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector signum" may never fire
+      because rule "Class op signum" for ‘signum’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX16.hs:217:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector negate" may never fire
+      because rule "Class op negate" for ‘negate’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX16.hs:218:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector const" may never fire
+      because ‘const’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma for ‘const’
+
+src-128/Data/Primitive/SIMD/DoubleX16.hs:219:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX16.hs:220:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (+x)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX16.hs:221:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x-)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX16.hs:222:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (-x)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX16.hs:223:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x*)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX16.hs:224:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (*x)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX16.hs:225:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x/)" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX16.hs:226:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (/x)" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX16.hs:241:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector +" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX16.hs:242:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector -" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX16.hs:243:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector *" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX16.hs:244:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector /" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX16.hs:253:11: warning: [-Winline-rule-shadowing]
+    Rule "foldVector (+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+[ 3 of 33] Compiling Data.Primitive.SIMD.DoubleX2 ( src-128/Data/Primitive/SIMD/DoubleX2.hs, .stack-work/dist/x86_64-linux/Cabal-1.24.2.0/build/Data/Primitive/SIMD/DoubleX2.o )
+
+src-128/Data/Primitive/SIMD/DoubleX2.hs:199:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector abs" may never fire
+      because rule "Class op abs" for ‘abs’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX2.hs:200:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector signum" may never fire
+      because rule "Class op signum" for ‘signum’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX2.hs:201:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector negate" may never fire
+      because rule "Class op negate" for ‘negate’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX2.hs:202:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector const" may never fire
+      because ‘const’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma for ‘const’
+
+src-128/Data/Primitive/SIMD/DoubleX2.hs:203:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX2.hs:204:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (+x)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX2.hs:205:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x-)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX2.hs:206:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (-x)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX2.hs:207:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x*)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX2.hs:208:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (*x)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX2.hs:209:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x/)" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX2.hs:210:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (/x)" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX2.hs:225:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector +" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX2.hs:226:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector -" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX2.hs:227:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector *" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX2.hs:228:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector /" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+[ 4 of 33] Compiling Data.Primitive.SIMD.DoubleX4 ( src-128/Data/Primitive/SIMD/DoubleX4.hs, .stack-work/dist/x86_64-linux/Cabal-1.24.2.0/build/Data/Primitive/SIMD/DoubleX4.o )
+
+src-128/Data/Primitive/SIMD/DoubleX4.hs:203:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector abs" may never fire
+      because rule "Class op abs" for ‘abs’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX4.hs:204:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector signum" may never fire
+      because rule "Class op signum" for ‘signum’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX4.hs:205:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector negate" may never fire
+      because rule "Class op negate" for ‘negate’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX4.hs:206:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector const" may never fire
+      because ‘const’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma for ‘const’
+
+src-128/Data/Primitive/SIMD/DoubleX4.hs:207:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX4.hs:208:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (+x)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX4.hs:209:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x-)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX4.hs:210:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (-x)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX4.hs:211:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x*)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX4.hs:212:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (*x)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX4.hs:213:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x/)" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX4.hs:214:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (/x)" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX4.hs:229:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector +" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX4.hs:230:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector -" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX4.hs:231:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector *" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX4.hs:232:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector /" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX4.hs:241:11: warning: [-Winline-rule-shadowing]
+    Rule "foldVector (+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+[ 5 of 33] Compiling Data.Primitive.SIMD.DoubleX8 ( src-128/Data/Primitive/SIMD/DoubleX8.hs, .stack-work/dist/x86_64-linux/Cabal-1.24.2.0/build/Data/Primitive/SIMD/DoubleX8.o )
+
+src-128/Data/Primitive/SIMD/DoubleX8.hs:207:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector abs" may never fire
+      because rule "Class op abs" for ‘abs’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX8.hs:208:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector signum" may never fire
+      because rule "Class op signum" for ‘signum’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX8.hs:209:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector negate" may never fire
+      because rule "Class op negate" for ‘negate’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX8.hs:210:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector const" may never fire
+      because ‘const’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma for ‘const’
+
+src-128/Data/Primitive/SIMD/DoubleX8.hs:211:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX8.hs:212:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (+x)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX8.hs:213:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x-)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX8.hs:214:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (-x)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX8.hs:215:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x*)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX8.hs:216:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (*x)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX8.hs:217:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x/)" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX8.hs:218:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (/x)" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX8.hs:233:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector +" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX8.hs:234:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector -" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX8.hs:235:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector *" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX8.hs:236:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector /" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/DoubleX8.hs:245:11: warning: [-Winline-rule-shadowing]
+    Rule "foldVector (+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+[ 6 of 33] Compiling Data.Primitive.SIMD.FloatX16 ( src-128/Data/Primitive/SIMD/FloatX16.hs, .stack-work/dist/x86_64-linux/Cabal-1.24.2.0/build/Data/Primitive/SIMD/FloatX16.o )
+
+src-128/Data/Primitive/SIMD/FloatX16.hs:207:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector abs" may never fire
+      because rule "Class op abs" for ‘abs’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX16.hs:208:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector signum" may never fire
+      because rule "Class op signum" for ‘signum’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX16.hs:209:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector negate" may never fire
+      because rule "Class op negate" for ‘negate’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX16.hs:210:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector const" may never fire
+      because ‘const’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma for ‘const’
+
+src-128/Data/Primitive/SIMD/FloatX16.hs:211:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX16.hs:212:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (+x)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX16.hs:213:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x-)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX16.hs:214:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (-x)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX16.hs:215:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x*)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX16.hs:216:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (*x)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX16.hs:217:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x/)" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX16.hs:218:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (/x)" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX16.hs:233:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector +" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX16.hs:234:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector -" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX16.hs:235:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector *" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX16.hs:236:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector /" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX16.hs:245:11: warning: [-Winline-rule-shadowing]
+    Rule "foldVector (+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+[ 7 of 33] Compiling Data.Primitive.SIMD.FloatX4 ( src-128/Data/Primitive/SIMD/FloatX4.hs, .stack-work/dist/x86_64-linux/Cabal-1.24.2.0/build/Data/Primitive/SIMD/FloatX4.o )
+
+src-128/Data/Primitive/SIMD/FloatX4.hs:199:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector abs" may never fire
+      because rule "Class op abs" for ‘abs’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX4.hs:200:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector signum" may never fire
+      because rule "Class op signum" for ‘signum’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX4.hs:201:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector negate" may never fire
+      because rule "Class op negate" for ‘negate’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX4.hs:202:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector const" may never fire
+      because ‘const’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma for ‘const’
+
+src-128/Data/Primitive/SIMD/FloatX4.hs:203:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX4.hs:204:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (+x)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX4.hs:205:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x-)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX4.hs:206:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (-x)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX4.hs:207:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x*)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX4.hs:208:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (*x)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX4.hs:209:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x/)" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX4.hs:210:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (/x)" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX4.hs:225:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector +" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX4.hs:226:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector -" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX4.hs:227:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector *" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX4.hs:228:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector /" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+[ 8 of 33] Compiling Data.Primitive.SIMD.FloatX8 ( src-128/Data/Primitive/SIMD/FloatX8.hs, .stack-work/dist/x86_64-linux/Cabal-1.24.2.0/build/Data/Primitive/SIMD/FloatX8.o )
+
+src-128/Data/Primitive/SIMD/FloatX8.hs:203:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector abs" may never fire
+      because rule "Class op abs" for ‘abs’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX8.hs:204:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector signum" may never fire
+      because rule "Class op signum" for ‘signum’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX8.hs:205:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector negate" may never fire
+      because rule "Class op negate" for ‘negate’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX8.hs:206:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector const" may never fire
+      because ‘const’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma for ‘const’
+
+src-128/Data/Primitive/SIMD/FloatX8.hs:207:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX8.hs:208:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (+x)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX8.hs:209:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x-)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX8.hs:210:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (-x)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX8.hs:211:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x*)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX8.hs:212:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (*x)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX8.hs:213:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x/)" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX8.hs:214:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (/x)" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX8.hs:229:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector +" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX8.hs:230:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector -" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX8.hs:231:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector *" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX8.hs:232:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector /" may never fire
+      because rule "Class op /" for ‘/’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/FloatX8.hs:241:11: warning: [-Winline-rule-shadowing]
+    Rule "foldVector (+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+[ 9 of 33] Compiling Data.Primitive.SIMD.Int16X16 ( src-128/Data/Primitive/SIMD/Int16X16.hs, .stack-work/dist/x86_64-linux/Cabal-1.24.2.0/build/Data/Primitive/SIMD/Int16X16.o )
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:17:1: warning: [-Wunused-imports]
+    The import of ‘GHC.Types’ is redundant
+      except perhaps to import instances from ‘GHC.Types’
+    To import instances alone, use: import GHC.Types()
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:188:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector abs" may never fire
+      because rule "Class op abs" for ‘abs’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:189:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector signum" may never fire
+      because rule "Class op signum" for ‘signum’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:190:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector negate" may never fire
+      because rule "Class op negate" for ‘negate’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:191:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector const" may never fire
+      because ‘const’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma for ‘const’
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:192:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:193:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (+x)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:194:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x-)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:195:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (-x)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:196:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x*)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:197:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (*x)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:199:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (`quot` x)" may never fire
+      because rule "Class op quot" for ‘quot’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:200:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x `quot`)" may never fire
+      because rule "Class op quot" for ‘quot’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:215:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector +" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:216:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector -" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:217:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector *" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:218:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector `quotVector`" may never fire
+      because rule "Class op quot" for ‘quot’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:219:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector `remVector`" may never fire
+      because rule "Class op rem" for ‘rem’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X16.hs:228:11: warning: [-Winline-rule-shadowing]
+    Rule "foldVector (+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+[10 of 33] Compiling Data.Primitive.SIMD.Int16X32 ( src-128/Data/Primitive/SIMD/Int16X32.hs, .stack-work/dist/x86_64-linux/Cabal-1.24.2.0/build/Data/Primitive/SIMD/Int16X32.o )
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:17:1: warning: [-Wunused-imports]
+    The import of ‘GHC.Types’ is redundant
+      except perhaps to import instances from ‘GHC.Types’
+    To import instances alone, use: import GHC.Types()
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:192:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector abs" may never fire
+      because rule "Class op abs" for ‘abs’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:193:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector signum" may never fire
+      because rule "Class op signum" for ‘signum’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:194:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector negate" may never fire
+      because rule "Class op negate" for ‘negate’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:195:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector const" may never fire
+      because ‘const’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma for ‘const’
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:196:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:197:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (+x)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:198:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x-)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:199:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (-x)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:200:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x*)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:201:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (*x)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:203:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (`quot` x)" may never fire
+      because rule "Class op quot" for ‘quot’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:204:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x `quot`)" may never fire
+      because rule "Class op quot" for ‘quot’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:219:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector +" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:220:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector -" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:221:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector *" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:222:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector `quotVector`" may never fire
+      because rule "Class op quot" for ‘quot’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:223:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector `remVector`" may never fire
+      because rule "Class op rem" for ‘rem’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X32.hs:232:11: warning: [-Winline-rule-shadowing]
+    Rule "foldVector (+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+[11 of 33] Compiling Data.Primitive.SIMD.Int16X8 ( src-128/Data/Primitive/SIMD/Int16X8.hs, .stack-work/dist/x86_64-linux/Cabal-1.24.2.0/build/Data/Primitive/SIMD/Int16X8.o )
+
+src-128/Data/Primitive/SIMD/Int16X8.hs:17:1: warning: [-Wunused-imports]
+    The import of ‘GHC.Types’ is redundant
+      except perhaps to import instances from ‘GHC.Types’
+    To import instances alone, use: import GHC.Types()
+
+src-128/Data/Primitive/SIMD/Int16X8.hs:184:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector abs" may never fire
+      because rule "Class op abs" for ‘abs’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X8.hs:185:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector signum" may never fire
+      because rule "Class op signum" for ‘signum’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X8.hs:186:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector negate" may never fire
+      because rule "Class op negate" for ‘negate’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X8.hs:187:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector const" may never fire
+      because ‘const’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma for ‘const’
+
+src-128/Data/Primitive/SIMD/Int16X8.hs:188:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X8.hs:189:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (+x)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X8.hs:190:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x-)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X8.hs:191:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (-x)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X8.hs:192:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x*)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X8.hs:193:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (*x)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X8.hs:195:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (`quot` x)" may never fire
+      because rule "Class op quot" for ‘quot’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X8.hs:196:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x `quot`)" may never fire
+      because rule "Class op quot" for ‘quot’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X8.hs:211:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector +" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X8.hs:212:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector -" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X8.hs:213:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector *" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X8.hs:214:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector `quotVector`" may never fire
+      because rule "Class op quot" for ‘quot’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int16X8.hs:215:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector `remVector`" may never fire
+      because rule "Class op rem" for ‘rem’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+[12 of 33] Compiling Data.Primitive.SIMD.Int32X16 ( src-128/Data/Primitive/SIMD/Int32X16.hs, .stack-work/dist/x86_64-linux/Cabal-1.24.2.0/build/Data/Primitive/SIMD/Int32X16.o )
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:17:1: warning: [-Wunused-imports]
+    The import of ‘GHC.Types’ is redundant
+      except perhaps to import instances from ‘GHC.Types’
+    To import instances alone, use: import GHC.Types()
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:192:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector abs" may never fire
+      because rule "Class op abs" for ‘abs’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:193:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector signum" may never fire
+      because rule "Class op signum" for ‘signum’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:194:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector negate" may never fire
+      because rule "Class op negate" for ‘negate’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:195:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector const" may never fire
+      because ‘const’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma for ‘const’
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:196:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:197:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (+x)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:198:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x-)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:199:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (-x)" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:200:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x*)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:201:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (*x)" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:203:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (`quot` x)" may never fire
+      because rule "Class op quot" for ‘quot’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:204:11: warning: [-Winline-rule-shadowing]
+    Rule "mapVector (x `quot`)" may never fire
+      because rule "Class op quot" for ‘quot’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:219:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector +" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:220:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector -" may never fire
+      because rule "Class op -" for ‘-’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:221:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector *" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:222:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector `quotVector`" may never fire
+      because rule "Class op quot" for ‘quot’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:223:11: warning: [-Winline-rule-shadowing]
+    Rule "zipVector `remVector`" may never fire
+      because rule "Class op rem" for ‘rem’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+src-128/Data/Primitive/SIMD/Int32X16.hs:232:11: warning: [-Winline-rule-shadowing]
+    Rule "foldVector (+)" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule

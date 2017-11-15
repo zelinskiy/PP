@@ -1,0 +1,30 @@
+name:                lab3
+version:             0.1.0.0
+-- synopsis:
+-- description:
+homepage:            https://github.com/zelinskiy/lab3#readme
+license:             BSD3
+license-file:        LICENSE
+author:              zelinskiy
+maintainer:          zelinskiy1917@gmail.com
+copyright:           CC BY-NC-SA
+category:            Web
+build-type:          Simple
+cabal-version:       >=1.10
+extra-source-files:  README.md
+
+executable lab3
+  hs-source-dirs:      src
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5
+                     , ghc-prim
+                     , primitive
+                     , vector
+                     , MonadRandom
+  ghc-options:        -fllvm
+                      -O2
+                      -mavx
+                      -mavx2
+                      -mavx512f
+                      -funbox-strict-fields

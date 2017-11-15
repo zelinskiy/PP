@@ -1,0 +1,95 @@
+
+==================== FINAL INTERFACE ====================
+2017-11-15 14:17:32.23912796 UTC
+
+interface main@main:Data.SIMD 8002
+  interface hash: 209172ba7bf7a8b81bbf14938ae9d0fb
+  ABI hash: a5d6f9d735ceea814530afec85f87210
+  export-list hash: 8c093be496508c7b72fcd028441e5347
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 42539547a5266a3ba89a8c5b1437b89a
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  Data.SIMD.SIMD4.unVectorizeStorableX4
+  Data.SIMD.SIMD4.unVectorizeUnboxedX4
+  Data.SIMD.SIMD4.unsafeVectorizeUnboxedX4
+  Data.SIMD.SIMD4.vectorizeStorableX4
+  Data.SIMD.SIMD4.vectorizeUnboxedX4
+  Data.SIMD.SIMD4.SIMD4{Data.SIMD.SIMD4.X4 Data.SIMD.SIMD4.broadcastX4 Data.SIMD.SIMD4.indexArrayAsX4 Data.SIMD.SIMD4.indexOffAddrAsX4 Data.SIMD.SIMD4.insertX4 Data.SIMD.SIMD4.minusX4 Data.SIMD.SIMD4.negateX4 Data.SIMD.SIMD4.packX4 Data.SIMD.SIMD4.plusHorizontalX4 Data.SIMD.SIMD4.plusX4 Data.SIMD.SIMD4.readOffAddrAsX4 Data.SIMD.SIMD4.timesHorizontalX4 Data.SIMD.SIMD4.timesX4 Data.SIMD.SIMD4.unpackX4 Data.SIMD.SIMD4.writeOffAddrAsX4}
+  Data.SIMD.SIMD4.SIMD4Float{Data.SIMD.SIMD4.divideX4}
+module dependencies: Data.SIMD.SIMD4
+package dependencies: array-0.5.1.1@array-0.5.1.1 base-4.9.1.0
+                      deepseq-1.4.2.0@deepseq-1.4.2.0 ghc-prim-0.5.0.0
+                      integer-gmp-1.0.0.1
+                      primitive-0.6.2.0@primitive-0.6.2.0-4578caNkWQ54Gt1mxLF2Yh
+                      transformers-0.5.2.0@transformers-0.5.2.0
+                      vector-0.12.0.1@vector-0.12.0.1-692PQMDMB6pIQ1uGwefDcQ
+orphans: base-4.9.1.0:GHC.Base base-4.9.1.0:GHC.Float
+         transformers-0.5.2.0@transformers-0.5.2.0:Control.Monad.Trans.Error
+         vector-0.12.0.1@vector-0.12.0.1-692PQMDMB6pIQ1uGwefDcQ:Data.Vector.Fusion.Bundle
+         vector-0.12.0.1@vector-0.12.0.1-692PQMDMB6pIQ1uGwefDcQ:Data.Vector.Unboxed
+family instance modules: base-4.9.1.0:Control.Applicative
+                         base-4.9.1.0:Data.Complex base-4.9.1.0:Data.Either
+                         base-4.9.1.0:Data.Functor.Const base-4.9.1.0:Data.Functor.Identity
+                         base-4.9.1.0:Data.List.NonEmpty base-4.9.1.0:Data.Monoid
+                         base-4.9.1.0:Data.Semigroup base-4.9.1.0:Data.Type.Equality
+                         base-4.9.1.0:Data.Version base-4.9.1.0:Data.Void
+                         base-4.9.1.0:GHC.Exts base-4.9.1.0:GHC.Generics
+                         base-4.9.1.0:GHC.IO.Exception base-4.9.1.0:GHC.TypeLits
+                         main@main:Data.SIMD.SIMD4
+                         primitive-0.6.2.0@primitive-0.6.2.0-4578caNkWQ54Gt1mxLF2Yh:Control.Monad.Primitive
+                         primitive-0.6.2.0@primitive-0.6.2.0-4578caNkWQ54Gt1mxLF2Yh:Data.Primitive.Array
+                         vector-0.12.0.1@vector-0.12.0.1-692PQMDMB6pIQ1uGwefDcQ:Data.Vector.Primitive
+                         vector-0.12.0.1@vector-0.12.0.1-692PQMDMB6pIQ1uGwefDcQ:Data.Vector.Storable
+                         vector-0.12.0.1@vector-0.12.0.1-692PQMDMB6pIQ1uGwefDcQ:Data.Vector.Unboxed
+                         vector-0.12.0.1@vector-0.12.0.1-692PQMDMB6pIQ1uGwefDcQ:Data.Vector.Unboxed.Base
+import  -/  base-4.9.1.0:Prelude 22dd289b8469a8fa8dc81cab7b237771
+import  -/  Data.SIMD.SIMD4 314de3aec15fafc5935e98ce3f2ff302
+  exports: 8c093be496508c7b72fcd028441e5347
+  SIMD4 08c56e271d21348b8f7981bc71dd0fe2
+  SIMD4Float 08c56e271d21348b8f7981bc71dd0fe2
+  X4 7d0526ca09f096adf0e01d3284d0adff
+  broadcastX4 2d120128b2157993c1beebc50da90927
+  divideX4 78398b2b47c5fa93c966187889f1e87f
+  indexArrayAsX4 782f795bc24e26c5e79165936620564d
+  indexOffAddrAsX4 fc336a822125b3f4754b079aedd626e6
+  insertX4 1d6e372022291421b5faee2927fa9a95
+  minusX4 80eb2c92d8bf1e5c4b4b4d5110da9cbd
+  negateX4 efca3a6f9f1db01842676507055709b4
+  packX4 1c219243bf1c815a0b4358249918fa9d
+  plusHorizontalX4 f3afb9aa9164d9badbbd5f3197155caa
+  plusX4 27eb26e711233891af49f7ec849e2f5f
+  readOffAddrAsX4 1422b1c37cd591f73b8e926de6f2dc5c
+  timesHorizontalX4 a209063d0ed4fd0399170d53a8caf743
+  timesX4 e716306052f487589706f3fb32eafa6c
+  unVectorizeStorableX4 d18b5ae4789f89e9166e1a3bc4798d50
+  unVectorizeUnboxedX4 31eb4ab4adf90f37be3c1d63edf07771
+  unpackX4 2f61d43726cc9936f89237f3c05f8985
+  unsafeVectorizeUnboxedX4 543847cc6dc70cc7c00e4231e4d1efff
+  vectorizeStorableX4 36e06e14a8649b53fe968fd2bb00d320
+  vectorizeUnboxedX4 b01743b28c8df5d70ece6a1314d2b79a
+  writeOffAddrAsX4 15befecd6c31f008a92d6c424148da63
+06c80281a4b581e0c0008f995c9a3786
+  $trModule :: GHC.Types.Module
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.Module
+                   Data.SIMD.$trModule2
+                   Data.SIMD.$trModule1) -}
+30d09dcd3cd56ae3475c8d0f1dc28cb5
+  $trModule1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "Data.SIMD"#) -}
+6ee19c5cba16c93502f190f3693213cc
+  $trModule2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "main"#) -}
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: none
+require own pkg trusted: False
+
