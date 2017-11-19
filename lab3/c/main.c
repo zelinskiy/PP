@@ -74,16 +74,76 @@ void sum_mmx_8(
      c = (int8_t*)c_mmx;
 }
 
+void task2_i8(int8_t* a, int8_t* b, int8_t* c, int n){
+     for(int i = 0; i < n; i++)
+	  c[i] = abs(a[i]) + abs(b[i]);
+}
+
+void task2_i16(int16_t* a, int16_t* b, int16_t* c, int n){
+     for(int i = 0; i < n; i++)
+	  c[i] = abs(a[i]) + abs(b[i]);
+}
+
+void task2_i32(int32_t* a, int32_t* b, int32_t* c, int n){
+     for(int i = 0; i < n; i++)
+	  c[i] = abs(a[i]) + abs(b[i]);
+}
+
+void task2_i64(int64_t* a, int64_t* b, int64_t* c, int n){
+     for(int i = 0; i < n; i++)
+	  c[i] = abs(a[i]) + abs(b[i]);
+}
+
+void task2_f(float* a, float* b, float* c, int n){
+     for(int i = 0; i < n; i++)
+	  c[i] = fabsf(a[i]) + fabsf(b[i]);
+}
+
+void task2_d(double* a, double* b, double* c, int n){
+     for(int i = 0; i < n; i++)
+	  c[i] = fabs(a[i]) + fabs(b[i]);
+}
+
+void task2(){
+     int n = 1024;
+     struct timespec start, end;
+
+     // 8
+     int8_t* a = malloc(n*sizeof(int8_t));
+     int8_t* b = malloc(n*sizeof(int8_t));
+     int8_t* c = malloc(n*sizeof(int8_t));
+
+     for(int i = 0; i < n; i++){
+	  a[i] = rand();
+	  b[i] = rand();
+     }
+     
+     clock_gettime(CLOCK_REALTIME, &start);
+     printf("8 bit: %30.32f\n",
+	    integrate(fun1, 0.0, 1.0, 1.0/(double) n));
+     clock_gettime(CLOCK_REALTIME, &end);
+     
+     printf("in %fs\n", (end.tv_sec - start.tv_sec)
+	    + (end.tv_nsec - start.tv_nsec) / 1e9);
+}
+
+
 int main (int argc, char *argv[]) {
+     srand(time(NULL));
      printf("BEGIN\n");
      //task1();
+
      
-     int8_t a[1024] = {[0 ... 1023] = 40};
-     int8_t b[1024] = {[0 ... 1023] = 12};
-     int8_t c[1024];
-     
-     sum_mmx_8(a, b, c, sizeof(a));
-     for(int i = 0; i < 1024; i++){
+     int8_t* a = malloc(n*sizeof(int8_t));
+     int8_t* b = malloc(n*sizeof(int8_t));
+     int8_t* c = malloc(n*sizeof(int8_t));
+
+     for(int i = 0; i < n; i++){
+	  a[i] = rand();
+	  b[i] = rand();
+     }
+     task2_i8(a, b, c, n);
+     for(int i = 0; i < n; i++){
 	  printf("%i ", c[i]);
      }
      

@@ -1,0 +1,85 @@
+-------------------- TASK 1 ------------------------
+bad version:
+
+ Performance counter stats for './main 1 0':
+
+        13,367,464      branch-misses:u                                             
+
+       5.624583711 seconds time elapsed
+
+good version:
+
+ Performance counter stats for './main 1 0':
+
+        13,325,068      branch-misses:u                                             
+
+       5.252598187 seconds time elapsed
+
+-------------------- TASK 2 ------------------------
+bad version:
+
+ Performance counter stats for './main 2 0':
+
+     1,432,332,363      branch-misses:u                                             
+
+      14.933405861 seconds time elapsed
+
+good version:
+
+ Performance counter stats for './main 2 0':
+
+     1,439,067,130      branch-misses:u                                             
+
+      14.982949461 seconds time elapsed
+
+-------------------- TASK 3 ------------------------
+bad version:
+
+ Performance counter stats for './main 3 0':
+
+     1,113,621,010      branch-misses:u                                             
+
+       8.224767659 seconds time elapsed
+
+good version:
+
+ Performance counter stats for './main 3 0':
+
+     1,158,677,491      branch-misses:u                                             
+
+       8.439042618 seconds time elapsed
+
+-------------------- TASK 4 ------------------------
+bad version:
+
+ Performance counter stats for './main 4 0':
+
+         3,549,254      branch-misses:u                                             
+
+       2.242988125 seconds time elapsed
+
+good version:
+
+ Performance counter stats for './main 4 0':
+
+         3,549,936      branch-misses:u                                             
+
+       2.335413716 seconds time elapsed
+
+-------------------- TASK 5 ------------------------
+bad version:
+
+ Performance counter stats for './main 5 0':
+
+         3,561,079      branch-misses:u                                             
+
+       2.944832980 seconds time elapsed
+
+good version:
+
+ Performance counter stats for './main 5 0':
+
+         3,559,588      branch-misses:u                                             
+
+       2.982387428 seconds time elapsed
+
