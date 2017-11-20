@@ -1,11 +1,13 @@
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
 #include <cpuid.h>
 #include <string.h>
 #include <mmintrin.h>
-#include <emmintrin.h> 
+#include <emmintrin.h>
+#include <pmmintrin.h>
 
 //https://software.intel.com/sites/landingpage/IntrinsicsGuide
 
@@ -385,12 +387,103 @@ void task6(){
 // | sse2 double  |  0.072700s   |
 // +--------------+--------------+
 
+typedef struct {
+     float re;
+     float im;
+} complex;
 
+void mult_C(complex* x, complex* y, complex *z, int n)
+{
+     for(int i = 0; i < n; i++){
+	z[i].re = (x[i].re*y[i].re) - (x[i].im*y[i].im);
+	(z[i]).im = (x[i].im*y[i].re) + (y[i].im*x[i].re);
+     }
+}
+
+void print128_num(__m128 var)
+{
+    float *val = (float*) &var;
+    printf("[D] %2.2f %2.2f %2.2f %2.2f\n", 
+           val[0], val[1], val[2], val[3]);
+}
+
+void complex_arrays_eq(complex* x, complex* y, int n){
+     for(int i = 0; i < n; i++){
+	  if(x[i].re != y[i].re || x[i].im != y[i].im ){
+	       printf("NO\n");
+	       return;
+	  }
+     }
+     printf("YES\n");
+}
+
+void mult_SSE(complex* x, complex* y, complex *z, int n)
+{
+     __m128 num1, num2;
+	
+     for(int i = 0; i < n; i++){
+	  num1 = _mm_setr_ps(x[i].re, x[i].im, x[i].im, y[i].im);
+	  num2 = _mm_setr_ps(y[i].re, y[i].re, y[i].im, x[i].re);
+	  
+	  num1 = _mm_mul_ps(num1, num2);
+	  
+	  num2 = _mm_shuffle_ps(num1, num1, _MM_SHUFFLE(0,1,3,2));
+	  
+	  num2 = _mm_addsub_ps(num1, num2);
+	  
+	  _mm_storel_pi((__m64*)(z + i), num2);	
+	}	
+}
+
+void task8(){
+     printf("TASK 8\n");
+     int n = 4096 * 4096;
+     struct timespec start, end;
+
+     complex* x = calloc(n, sizeof(complex));
+     complex* y = calloc(n, sizeof(complex));
+     complex* z = calloc(n, sizeof(complex));
+
+     float alpha = -10000.0;
+     float beta = 10000.0;
+
+     for(int i = 0; i < n; i++){
+	  x[i].re = alpha + ((float)rand()/(float)RAND_MAX)*(beta-alpha);
+	  x[i].im = alpha + ((float)rand()/(float)RAND_MAX)*(beta-alpha);
+	  y[i].re = alpha + ((float)rand()/(float)RAND_MAX)*(beta-alpha);
+	  y[i].im = alpha + ((float)rand()/(float)RAND_MAX)*(beta-alpha);
+     }
+
+     clock_gettime(CLOCK_REALTIME, &start);
+     mult_C(x, y, z, n);
+     clock_gettime(CLOCK_REALTIME, &end);     
+     printf("complex no simd in %fs\n", (end.tv_sec - start.tv_sec)
+	    + (end.tv_nsec - start.tv_nsec) / 1e9);
+
+     clock_gettime(CLOCK_REALTIME, &start);
+     mult_SSE(x, y, z, n);
+     clock_gettime(CLOCK_REALTIME, &end);     
+     printf("complex sse in %fs\n", (end.tv_sec - start.tv_sec)
+	    + (end.tv_nsec - start.tv_nsec) / 1e9);
+}
+
+// task 8
+// 4096 * 4096
+// +--------------+--------------+
+// |      type    |     time     |
+// +--------------+--------------+
+// |      C       |  0.126849s   |
+// +--------------+--------------+
+// |     SSE      |  0.085923s   |
+// +--------------+--------------+
+
+// gcc -msse3 -msse2 -msse -lm  main.c -o main && ./main
 int main (int argc, char *argv[]) {
      srand(time(NULL));
-     printf("BEGIN\n");
-     task1();
-     task2();
-     task6();
+     printf("BEGIN\n\n");
+     //task1();
+     //task2();
+     //task6();
+     task8();
      printf("\nEND");
 }
