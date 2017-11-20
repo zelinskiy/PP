@@ -57,7 +57,7 @@ int main (int argc, char *argv[]){
      
      const int n = 2;
      const int k = 1;
-     const int s = 12;
+     const int s = 50;
      const int t_prob = 20;
      
      bit* story = calloc(s, sizeof(bit));

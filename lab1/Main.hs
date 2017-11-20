@@ -1,6 +1,3 @@
-{-# LANGUAGE ExistentialQuantification #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
@@ -48,13 +45,13 @@ clocks =
   --То же, но для потоков
   , ThreadCPUTime
   ]
+
 {-
 Ignore this
 clock_gettime(CLOCK_MONOTONIC_RAW)       100ns/call
 clock_gettime(CLOCK_MONOTONIC)           25ns/call
 clock_gettime(CLOCK_REALTIME)            25ns/call
 clock_gettime(CLOCK_PROCESS_CPUTIME_ID)  400ns/call
-rdtsc (implementation @DavidSchwarz)     600ns/call
 -}
 
 
@@ -135,9 +132,9 @@ task3 g c = do
 
 task3Rdtsc g = do
   let measure g = do
-        let inputs = take 1000 (randoms g :: [Int])
+        let inputs = take (10^3) (randoms g :: [Int])
         t1 <- inputs `deepseq` rdtsc
-        let s = sum inputs
+        let s = foldl' (+) 0 inputs
         t2 <- s `deepseq` rdtsc
         return $ t1 - t2
   
@@ -145,11 +142,14 @@ task3Rdtsc g = do
          sequence $
          replicate 10 $
          measure g
+  let freqns = 2800 * 10^6 * 10^9
   putStrLn $ "rdtsc: " ++ show res ++ " cycles"
+  let ns = fromIntegral res / freqns
+  putStrLn $ showFFloat Nothing ns "" ++ "ns"
   
 task3' g c = do
   let measure g c = do
-        let inputs = take 1000 (randoms g :: [Int])
+        let inputs = take (10^3) (randoms g :: [Int])
         t1 <- inputs `deepseq` getTime c
         let s = foldl' (+) 0 inputs
         t2 <- s `deepseq` getTime c
@@ -363,3 +363,4 @@ task9 g c = do
 -- Висновок:
 -- 1) Haskell is retarded.
 -- 2) I Wish I'd knew any other language(((
+-- 2.m) Wish I'd knew any lnguage(((

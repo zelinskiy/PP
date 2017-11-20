@@ -6,5 +6,5 @@ do
     echo "bad version:"
     perf stat -e branch-misses ./main $t 0
     echo "good version:"
-    perf stat -e branch-misses ./main $t 0
+    perf stat -e branch-misses ./main $t 1
 done

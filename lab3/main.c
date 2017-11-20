@@ -11,9 +11,15 @@
 
 //https://software.intel.com/sites/landingpage/IntrinsicsGuide
 
-//TODO:
-// more simd for sqrt
-// task 8 (complex multiplication)
+void arrays_equal(int* a, int* b, int n){     
+     for(int i = 0; i<n; i++){
+	  if(a[i] != b[i]) {
+	       printf("%d != %d at %d\n ", a[i], b[i], i);
+	       return;
+	  }	  
+     }
+     printf("arrays equal\n");	 
+}
 
 void task1(){
      printf("TASK 1\n");
@@ -477,6 +483,58 @@ void task8(){
 // |     SSE      |  0.085923s   |
 // +--------------+--------------+
 
+void shift(int32_t* a, int32_t* b, int size){
+  int32_t bit = 0;
+  for (int i = size - 1; i >= 0; i--){
+    bit = (a[i] >> 31) & 1;
+    b[i] = (a[i] << 1) | bit;
+  }
+}
+
+void shiftSSE(int32_t* a, int32_t* b, int size){
+  __m128i* pa = (__m128i*) a;
+  __m128i* pb = (__m128i*) b;
+  
+  __m128i bits[4];
+  __m128i one = _mm_set1_epi32(1);
+  
+
+  for (int i = 0; i < size / 4; i++){
+    bits[i] = _mm_srli_epi32(pa[i], 31);
+    
+    pb[i] = _mm_slli_epi32(pa[i], 1);
+    pb[i] = _mm_or_si128(pb[i], bits[i]);
+  }
+}
+
+
+void task9(){
+  printf("TASK 2\n");
+  int n = 4e7;
+  struct timespec start, end;
+
+  int32_t* a32 = malloc(n*sizeof(int32_t));
+  int32_t* c32 = malloc(n*sizeof(int32_t));
+  int32_t* c32_ = malloc(n*sizeof(int32_t));
+  
+  for(int i = 0; i < n; i++){
+    a32[i] = rand();
+  }
+  
+  clock_gettime(CLOCK_REALTIME, &start);
+  shift(a32, c32, n);
+  clock_gettime(CLOCK_REALTIME, &end);     
+  printf("no sse shift in %fs\n", (end.tv_sec - start.tv_sec)
+	 + (end.tv_nsec - start.tv_nsec) / 1e9);
+
+  clock_gettime(CLOCK_REALTIME, &start);
+  shiftSSE(a32, c32_, n);
+  clock_gettime(CLOCK_REALTIME, &end);     
+  printf("sse shift in %fs\n", (end.tv_sec - start.tv_sec)
+	 + (end.tv_nsec - start.tv_nsec) / 1e9);
+  
+}
+
 // gcc -msse3 -msse2 -msse -lm  main.c -o main && ./main
 int main (int argc, char *argv[]) {
      srand(time(NULL));
@@ -484,6 +542,7 @@ int main (int argc, char *argv[]) {
      //task1();
      //task2();
      //task6();
-     task8();
+     //task8();
+     task9();
      printf("\nEND");
 }

@@ -7,9 +7,6 @@
 
 //-----------------------TASKS------------------------------
 
-// n = 4e8
-// 13,309,709      branch-misses:u 
-// 5.189873888 seconds time elapsed
 int task1_bad(int* a, int n){
      int res = 0;
      for(int i=0;i<n;i++){
@@ -18,9 +15,6 @@ int task1_bad(int* a, int n){
      return res;
 }
 
-// n = 4e8
-// 13,321,596      branch-misses:u
-// 5.068166082 seconds time elapsed
 int task1_good(int* a, int n){
      int res = 0;
      for(int i=0;i<n;i++){
@@ -29,9 +23,6 @@ int task1_good(int* a, int n){
      return n + res;
 }
 
-// n = 1e5
-// 1,438,820,195      branch-misses:u
-// 14.954686597 seconds time elapsed
 void task2_bad(int* a, int n){
      int t;
      for(int i = 0; i < n; i++){
@@ -46,9 +37,6 @@ void task2_bad(int* a, int n){
      }
 }
 
-// n = 1e5
-// 218,618      branch-misses:u
-// 7.039969125 seconds time elapsed
 void task2_good(int* a, int n){
      int t;
      for(int i = 0; i < n; i++){
@@ -63,9 +51,6 @@ void task2_good(int* a, int n){
      }
 }
 
-// n = 1e6; m = 2e3
-// 1,127,087,108      branch-misses:u
-// 8.269032493 seconds time elapsed
 int* task3_bad(int* a, int* b, int a_n, int b_n){
      int* c = malloc((a_n + b_n - 1) * sizeof(int));
      
@@ -84,9 +69,6 @@ int* task3_bad(int* a, int* b, int a_n, int b_n){
      return c;
 }
 
-// n = 1e6; m = 2e3
-// 1,041,106      branch-misses:u
-// 2.691250433 seconds time elapsed
 int* task3_good(int* a, int* b, int a_n, int b_n){
      int* c = malloc((a_n + b_n - 1) * sizeof(int));
      
@@ -98,51 +80,36 @@ int* task3_good(int* a, int* b, int a_n, int b_n){
      return c;
 }
 
-// n = 10e7; f in [-10K..10K]
-// 3,442,115      branch-misses:u
-// 2.232059735 seconds time elapsed
 int* task4_good_float (float* a, int n){
      int* res = malloc(n * sizeof(int));
      double t;
      for(int i = 0; i < n; i++){
-	  t = a[i] + 6755399441055744.0;	  
-	  res[i] = *((int *)(&t));
+       res[i] = (float)(int)(a[i] + (a[i] >= 0) - 0.5);
      }
      return res;
 }
 
-// n = 10e7; f in [-10K..10K]
-// 3,555,239      branch-misses:u
-// 2.530510866 seconds time elapsed
 int* task4_bad_float (float* a, int n){
      int* res = malloc(n * sizeof(int));
      for(int i = 0; i < n; i++){
-	  res[i] = (int)roundf(a[i]);
-          //res[i] = (int)(a[i]<0 ? a[i]-0.5 : a[i]+0.5);
+          res[i] = (int)(a[i]<0 ? a[i]-0.5 : a[i]+0.5);
      }
      return res;
 }
 
-// n = 10e7; f in [-10K..10K]
-// 3,538,403      branch-misses:u
-// 2.833280569 seconds time elapsed
 int* task4_good_double (double* a, int n){
      int* res = malloc(n * sizeof(int));
      double t;
      for(int i = 0; i < n; i++){
-	  t = a[i] + 6755399441055744.0;
-	  res[i] = *((int *)(&t));
+       res[i] = (double)(int)(a[i] + (a[i] >= 0) - 0.5);
      }
      return res;
 }
 
-// n = 10e7; f in [-10K..10K]
-// 4,555,869      branch-misses:u
-// 3.199942895 seconds time elapsed
 int* task4_bad_double (double* a, int n){
      int* res = malloc(n * sizeof(int));
      for(int i = 0; i < n; i++){
-	  res[i] = (int)round(a[i]);
+       res[i] = (int)(a[i]<0 ? a[i]-0.5 : a[i]+0.5);
      }
      return res;
 }
@@ -265,7 +232,6 @@ int main (int argc, char *argv[]){
      case 4:
 	  n = 10e7;
 	  f = randoms_float(n, -10000.0, 10000.0);
-	  //arrays_equal(task4_good_float(f,f_n),task4_bad_float(f,f_n),f_n);
 	  if (good) task4_good_float(f, n);
 	  else task4_bad_float(f, n);
 	  break;
