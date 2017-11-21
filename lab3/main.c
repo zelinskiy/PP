@@ -1,3 +1,4 @@
+#include <malloc.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -8,6 +9,7 @@
 #include <mmintrin.h>
 #include <emmintrin.h>
 #include <pmmintrin.h>
+#include <immintrin.h>
 
 //https://software.intel.com/sites/landingpage/IntrinsicsGuide
 
@@ -92,9 +94,27 @@ void task2_i8(int8_t* a, int8_t* b, int8_t* c, int n){
 	  c[i] = abs(a[i]) + abs(b[i]);
 }
 
+void task2_i8_avx(int8_t* a, int8_t* b, int8_t* c, int n){
+     __m256i* pa = (__m256i*) a;
+     __m256i* pb = (__m256i*) b;
+     __m256i* pc = (__m256i*) c;
+
+     for(int i = 0; i < n / 32; i++)
+	  pc[i] = _mm256_add_epi8(_mm256_abs_epi8(pa[i]), _mm256_abs_epi8(pb[i]));
+     
+}
+
 void task2_i16(int16_t* a, int16_t* b, int16_t* c, int n){
      for(int i = 0; i < n; i++)
 	  c[i] = abs(a[i]) + abs(b[i]);
+}
+
+void task2_i16_avx(int16_t* a, int16_t* b, int16_t* c, int n){
+     __m256i* pa = (__m256i*) a;
+     __m256i* pb = (__m256i*) b;
+     __m256i* pc = (__m256i*) c;
+     for(int i = 0; i < n / 16; i++)
+	  pc[i] = _mm256_add_epi16(_mm256_abs_epi16(pa[i]), _mm256_abs_epi16(pb[i]));
 }
 
 void task2_i32(int32_t* a, int32_t* b, int32_t* c, int n){
@@ -102,9 +122,31 @@ void task2_i32(int32_t* a, int32_t* b, int32_t* c, int n){
 	  c[i] = abs(a[i]) + abs(b[i]);
 }
 
+void task2_i32_avx(int32_t* a, int32_t* b, int32_t* c, int n){
+     __m256i* pa = (__m256i*) a;
+     __m256i* pb = (__m256i*) b;
+     __m256i* pc = (__m256i*) c;
+     for(int i = 0; i < n / 8; i++)
+	  pc[i] = _mm256_add_epi32(_mm256_abs_epi32(pa[i]), _mm256_abs_epi32(pb[i]));
+}
+
 void task2_i64(int64_t* a, int64_t* b, int64_t* c, int n){
      for(int i = 0; i < n; i++)
 	  c[i] = abs(a[i]) + abs(b[i]);
+}
+/*
+void task2_i64_avx(int64_t* a, int64_t* b, int64_t* c, int n){
+     __m256i* pa = (__m256i*) a;
+     __m256i* pb = (__m256i*) b;
+     __m256i* pc = (__m256i*) c;
+     for(int i = 0; i < n / 4; i++)
+	  pc[i] = _mm256_add_epi64(pa[i], pb[i]);
+}
+*/
+
+inline __m128 _mm_abs_ps(__m128 x) {
+    const __m128 mask = _mm_set1_ps(-0.f); // -0.f = 1 << 31
+    return _mm_andnot_ps(mask, x);
 }
 
 void task2_f(float* a, float* b, float* c, int n){
@@ -112,10 +154,37 @@ void task2_f(float* a, float* b, float* c, int n){
 	  c[i] = fabsf(a[i]) + fabsf(b[i]);
 }
 
+void task2_f_sse(float* a, float* b, float* c, int n){
+     __m128 *pa = (__m128*) a;
+     __m128 *pb = (__m128*) b;
+     __m128 *pc = (__m128*) c;
+
+     for (int i = 0; i < n / 4; i++){
+	  pc[i] = _mm_add_ps(_mm_abs_ps(pa[i]), _mm_abs_ps(pb[i]));
+     }
+}
+
+inline __m128d _mm_abs_pd(__m128d x) {
+    const __m128d mask = _mm_set1_pd(-0.); // -0. = 1 << 63
+    return _mm_andnot_pd(mask, x); // !mask & x
+}
+
+
 void task2_d(double* a, double* b, double* c, int n){
      for(int i = 0; i < n; i++)
 	  c[i] = fabs(a[i]) + fabs(b[i]);
 }
+
+void task2_d_sse(double* a, double* b, double* c, int n){
+     __m128d *pa = (__m128d*) a;
+     __m128d *pb = (__m128d*) b;
+     __m128d *pc = (__m128d*) c;
+
+     for (int i = 0; i < n / 2; i++){
+	  pc[i] = _mm_add_pd(_mm_abs_pd(pa[i]), _mm_abs_pd(pb[i]));
+     }
+}
+
 
 void task2(){
      printf("TASK 2\n");
@@ -123,9 +192,9 @@ void task2(){
      struct timespec start, end;
 
      // 8i
-     int8_t* a8 = malloc(n*sizeof(int8_t));
-     int8_t* b8 = malloc(n*sizeof(int8_t));
-     int8_t* c8 = malloc(n*sizeof(int8_t));
+     int8_t* a8 = aligned_alloc(32,n*sizeof(int8_t));
+     int8_t* b8 = aligned_alloc(32,n*sizeof(int8_t));
+     int8_t* c8 = aligned_alloc(32,n*sizeof(int8_t));
 
      for(int i = 0; i < n; i++){
 	  a8[i] = rand();
@@ -138,12 +207,18 @@ void task2(){
      printf("8 bit in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
 
+     clock_gettime(CLOCK_REALTIME, &start);
+     task2_i8_avx(a8, b8, c8, n);
+     clock_gettime(CLOCK_REALTIME, &end);     
+     printf("8 bit avx in %fs\n", (end.tv_sec - start.tv_sec)
+	    + (end.tv_nsec - start.tv_nsec) / 1e9);
+     
      free(a8);free(b8);free(c8);
 
      // 16i
-     int16_t* a16 = malloc(n*sizeof(int16_t));
-     int16_t* b16 = malloc(n*sizeof(int16_t));
-     int16_t* c16 = malloc(n*sizeof(int16_t));
+     int16_t* a16 = aligned_alloc(32,n*sizeof(int16_t));
+     int16_t* b16 = aligned_alloc(32,n*sizeof(int16_t));
+     int16_t* c16 = aligned_alloc(32,n*sizeof(int16_t));
 
      for(int i = 0; i < n; i++){
 	  a16[i] = rand();
@@ -156,12 +231,18 @@ void task2(){
      printf("16 bit in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
 
+     clock_gettime(CLOCK_REALTIME, &start);
+     task2_i16_avx(a16, b16, c16, n);
+     clock_gettime(CLOCK_REALTIME, &end);     
+     printf("16 bit avx in %fs\n", (end.tv_sec - start.tv_sec)
+	    + (end.tv_nsec - start.tv_nsec) / 1e9);
+     
      free(a16);free(b16);free(c16);
 
      // 32i
-     int32_t* a32 = malloc(n*sizeof(int32_t));
-     int32_t* b32 = malloc(n*sizeof(int32_t));
-     int32_t* c32 = malloc(n*sizeof(int32_t));
+     int32_t* a32 = aligned_alloc(32,n*sizeof(int32_t));
+     int32_t* b32 = aligned_alloc(32,n*sizeof(int32_t));
+     int32_t* c32 = aligned_alloc(32,n*sizeof(int32_t));
 
      for(int i = 0; i < n; i++){
 	  a32[i] = rand();
@@ -174,12 +255,19 @@ void task2(){
      printf("32 bit in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
 
+     clock_gettime(CLOCK_REALTIME, &start);
+     task2_i32_avx(a32, b32, c32, n);
+     clock_gettime(CLOCK_REALTIME, &end);     
+     printf("32 bit avx in %fs\n", (end.tv_sec - start.tv_sec)
+	    + (end.tv_nsec - start.tv_nsec) / 1e9);
+     
+     
      free(a32);free(b32);free(c32);
 
      // 64i
-     int64_t* a64 = malloc(n*sizeof(int64_t));
-     int64_t* b64 = malloc(n*sizeof(int64_t));
-     int64_t* c64 = malloc(n*sizeof(int64_t));
+     int64_t* a64 = aligned_alloc(32,n*sizeof(int64_t));
+     int64_t* b64 = aligned_alloc(32,n*sizeof(int64_t));
+     int64_t* c64 = aligned_alloc(32,n*sizeof(int64_t));
 
      for(int i = 0; i < n; i++){
 	  a64[i] = rand();
@@ -191,13 +279,20 @@ void task2(){
      clock_gettime(CLOCK_REALTIME, &end);     
      printf("64 bit in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
-
+     /*
+     clock_gettime(CLOCK_REALTIME, &start);
+     task2_i64_avx(a64, b64, c64, n);
+     clock_gettime(CLOCK_REALTIME, &end);     
+     printf("64 bit avx in %fs\n", (end.tv_sec - start.tv_sec)
+	    + (end.tv_nsec - start.tv_nsec) / 1e9);
+     */
+     
      free(a64);free(b64);free(c64);
 
      // float
-     float* af = malloc(n*sizeof(float));
-     float* bf = malloc(n*sizeof(float));
-     float* cf = malloc(n*sizeof(float));
+     float* af = aligned_alloc(32,n*sizeof(float));
+     float* bf = aligned_alloc(32,n*sizeof(float));
+     float* cf = aligned_alloc(32,n*sizeof(float));
 
      float alpha_f = -100000.0;
      float beta_f = 100000.0;
@@ -213,12 +308,18 @@ void task2(){
      printf("float in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
 
+     clock_gettime(CLOCK_REALTIME, &start);
+     task2_f_sse(af, bf, cf, n);
+     clock_gettime(CLOCK_REALTIME, &end);     
+     printf("float sse in %fs\n", (end.tv_sec - start.tv_sec)
+	    + (end.tv_nsec - start.tv_nsec) / 1e9);
+     
      free(af);free(bf);free(cf);
 
      // double
-     double* ad = malloc(n*sizeof(double));
-     double* bd = malloc(n*sizeof(double));
-     double* cd = malloc(n*sizeof(double));
+     double* ad = aligned_alloc(32,n*sizeof(double));
+     double* bd = aligned_alloc(32,n*sizeof(double));
+     double* cd = aligned_alloc(32,n*sizeof(double));
 
      double alpha_d = -100000.0;
      double beta_d = 100000.0;
@@ -234,6 +335,13 @@ void task2(){
      printf("double in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
 
+     clock_gettime(CLOCK_REALTIME, &start);
+     task2_d_sse(ad, bd, cd, n);
+     clock_gettime(CLOCK_REALTIME, &end);     
+     printf("double sse in %fs\n", (end.tv_sec - start.tv_sec)
+	    + (end.tv_nsec - start.tv_nsec) / 1e9);
+     
+     
      free(ad);free(bd);free(cd);
 }
 
@@ -288,7 +396,6 @@ void sqrt_float_sse(
      __m128* x_sse = (__m128*)x;
      __m128* y_sse = (__m128*)y;
      int r = sizeof(__m128)/sizeof(float);
-     
      for (int i = 0; i < (n/r); i++){
 	  y_sse[i] = _mm_sqrt_ps(x_sse[i]);
      }
@@ -297,6 +404,23 @@ void sqrt_float_sse(
      }	  
      
      y = (float*)y_sse;
+}
+
+void sqrt_float_avx(
+     float* x,
+     float* y,
+     int n){
+     __m256* x_avx = (__m256*)x;
+     __m256* y_avx = (__m256*)y;
+
+     int r = sizeof(__m256)/sizeof(float);
+     for (int i = 0; i < (n/r); i++){
+	  y_avx[i] = _mm256_sqrt_ps(x_avx[i]);
+     }
+     for(int i = n - (n % r); i < n; i++){
+	  y[i] = sqrt(x[i]);
+     }
+     y = (float*)y_avx;
 }
 
 void sqrt_double(
@@ -326,16 +450,34 @@ void sqrt_double_sse2(
      y = (double*)y_sse2;
 }
 
+void sqrt_double_avx(
+     double* x,
+     double* y,
+     int n){
+     __m256d* x_avx = (__m256d*)x;
+     __m256d* y_avx = (__m256d*)y;
+     int r = sizeof(__m256d)/sizeof(double);
+     
+     for (int i = 0; i < (n/r); i++){
+	  y_avx[i] = _mm256_sqrt_pd(x_avx[i]);
+     }
+     for(int i = n - (n % r); i < n; i++){
+	  y[i] = sqrt(x[i]);
+     }	  
+     
+     y = (double*)y_avx;
+}
+
 void task6(){
      printf("TASK 6\n");
      int n = 4096 * 4096;
      struct timespec start, end;
 
      // float
-     float* x_f = malloc(n*sizeof(float));
-     float* y_f = malloc(n*sizeof(float));
+     float* x_f = aligned_alloc(32,n*sizeof(float));
+     float* y_f = aligned_alloc(32,n*sizeof(float));
 
-     float alpha_f = -1000000.0;
+     float alpha_f = 1.0;
      float beta_f = 1000000.0;
 
      for(int i = 0; i < n; i++){
@@ -353,12 +495,18 @@ void task6(){
      clock_gettime(CLOCK_REALTIME, &end);     
      printf("float sse in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
+     
+     clock_gettime(CLOCK_REALTIME, &start);     
+     sqrt_float_avx(x_f, y_f, n);
+     clock_gettime(CLOCK_REALTIME, &end);     
+     printf("float avx in %fs\n", (end.tv_sec - start.tv_sec)
+	    + (end.tv_nsec - start.tv_nsec) / 1e9);
 
      // double
-     double* x_d = malloc(n*sizeof(double));
-     double* y_d = malloc(n*sizeof(double));
+     double* x_d = aligned_alloc(32,n*sizeof(double));
+     double* y_d = aligned_alloc(32,n*sizeof(double));
 
-     double alpha_d = -1000000.0;
+     double alpha_d = 1.0;
      double beta_d = 1000000.0;
 
      for(int i = 0; i < n; i++){
@@ -375,6 +523,12 @@ void task6(){
      sqrt_double_sse2(x_d, y_d, n);
      clock_gettime(CLOCK_REALTIME, &end);     
      printf("double sse2 in %fs\n", (end.tv_sec - start.tv_sec)
+	    + (end.tv_nsec - start.tv_nsec) / 1e9);
+
+     clock_gettime(CLOCK_REALTIME, &start);
+     sqrt_double_avx(x_d, y_d, n);
+     clock_gettime(CLOCK_REALTIME, &end);     
+     printf("double avx in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
 
 }
@@ -513,9 +667,9 @@ void task9(){
   int n = 4e7;
   struct timespec start, end;
 
-  int32_t* a32 = malloc(n*sizeof(int32_t));
-  int32_t* c32 = malloc(n*sizeof(int32_t));
-  int32_t* c32_ = malloc(n*sizeof(int32_t));
+  int32_t* a32 = aligned_alloc(32,n*sizeof(int32_t));
+  int32_t* c32 = aligned_alloc(32,n*sizeof(int32_t));
+  int32_t* c32_ = aligned_alloc(32,n*sizeof(int32_t));
   
   for(int i = 0; i < n; i++){
     a32[i] = rand();
@@ -535,14 +689,15 @@ void task9(){
   
 }
 
-// gcc -msse3 -msse2 -msse -lm  main.c -o main && ./main
+// L1 = 32K, L2 = 256K, L3 = 3MB
+// gcc -msse3 -msse2 -msse -mavx -mavx2 -lm  main.c -o main && ./main
 int main (int argc, char *argv[]) {
      srand(time(NULL));
      printf("BEGIN\n\n");
-     //task1();
-     //task2();
-     //task6();
-     //task8();
+     task1();
+     task2();
+     task6();
+     task8();
      task9();
      printf("\nEND");
 }

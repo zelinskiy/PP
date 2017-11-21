@@ -10,6 +10,8 @@
 // TODO:
 // find n of iterations s.t. pi(n+1) == pi(n)
 
+#define PI 3.14159265358979323846
+
 void task1(){
 #ifdef _OPENMP
      printf ("_OPENMP Defined\n");
@@ -26,7 +28,6 @@ void task2(){
      }
      printf("(1 way) ncores = %d\n", n);
      printf("(2 way) ncores = %ld\n", sysconf(_SC_NPROCESSORS_ONLN));
-
 }
 
 double integrate(double (*f)(double), double a, double b, double step){
@@ -61,22 +62,25 @@ void task3(unsigned int n){
      struct timespec start, end;
 
      clock_gettime(CLOCK_REALTIME, &start);
-     printf("integral(4/(1+x^2)): %30.32f\n", integrate(fun1, 0.0, 1.0, 1.0/(double) n));
+     double r1 = integrate(fun1, 0.0, 1.0, 1.0/(double) n);
      clock_gettime(CLOCK_REALTIME, &end);
+     printf("integral(4/(1+x^2)): %30.32f (d=%30.32f)\n", r1, PI - r1);
      
      printf("in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
 
      clock_gettime(CLOCK_REALTIME, &start);
-     printf("integral(sqrt(1-x^2)): %30.32f\n", integrate(fun2, 0.0, 1.0, 1.0/(double) n));
+     double r2 = integrate(fun2, 0.0, 1.0, 1.0/(double) n);
      clock_gettime(CLOCK_REALTIME, &end);
+     printf("integral(sqrt(1-x^2)): %30.32f (d=%30.32f)\n", r2, PI - r2);
      
      printf("in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
      
      clock_gettime(CLOCK_REALTIME, &start);
-     printf("leubniz: %30.32f\n", leubniz(n));
+     double r3 = leubniz(n);
      clock_gettime(CLOCK_REALTIME, &end);
+     printf("leubniz: %30.32f (d=%30.32f)\n", r3, PI - r3);
      
      printf("in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);     
@@ -89,16 +93,14 @@ struct pi_struct{
      double res;
 };
 
-
-
-void task6 (unsigned int n) {
+void task6_old (unsigned int n) {
      struct timespec start, end;
      clock_gettime(CLOCK_REALTIME, &start);
 
      void* func(void* d){
 	  struct pi_struct* p = (struct pi_struct*) d;     
-	  for(double x = (*p).start; x < (*p).end; x += (*p).step){	       
-	       (*p).res += (4.0 * (*p).step) / (1.0 + x*x);
+	  for(double x = (*p).start; x < (*p).end; x += (*p).step){
+	       (*p).res += (*p).step / (1.0 + x*x);
 	  }
 	  return d;
      }
@@ -122,7 +124,61 @@ void task6 (unsigned int n) {
      for(int i = 0; i < t; i++){
 	  res += p[i].res;
      }     
-     printf("posix integral(4/(1+x^2)): %30.32f\n", res);
+     printf("posix integral(4/(1+x^2)): %30.32f (d=%30.32f)\n", 4.0*res, PI-4.0*res);
+     
+     clock_gettime(CLOCK_REALTIME, &end);
+     printf("in %fs\n", (end.tv_sec - start.tv_sec)
+	    + (end.tv_nsec - start.tv_nsec) / 1e9);
+}
+
+void task8_old (unsigned int n) {
+     struct timespec start, end;
+     clock_gettime(CLOCK_REALTIME, &start);
+     
+     double res = 0.0;
+     double step = 1.0/(double)n;
+#pragma omp parallel for reduction(+:res) num_threads(4)
+     for(unsigned int i = 0; i < n; i++){
+	  double x = step * i;
+	  res += step / (1.0 + x * x);  
+     }
+     printf("OMP integral(4/(1+x^2)): %30.32f (d=%30.32f)\n", 4.0 * res, PI - 4.0 * res);
+     
+     clock_gettime(CLOCK_REALTIME, &end);
+     printf("in %fs\n", (end.tv_sec - start.tv_sec)
+	    + (end.tv_nsec - start.tv_nsec) / 1e9);
+}
+
+void task6 (unsigned int n) {
+     struct timespec start, end;
+     clock_gettime(CLOCK_REALTIME, &start);
+
+     void* func(void* d){
+	  struct pi_struct* p = (struct pi_struct*) d;     
+	  for(unsigned int i = (*p).start; i < (*p).end; i++){       
+	       (*p).res += 1.0 / (2 * i + 1) * (i % 2 ? -1 : 1);  
+	  }
+	  return d;
+     }
+     
+     const int t = 4;     
+     struct pi_struct p[t];
+     pthread_t h[t];     
+     for(int i = 0; i < t; i++){
+	  p[i].start = i*n/t;
+	  p[i].end = (i+1)*n/t;
+	  p[i].res = 0.0;
+	  //printf("%u - %u\n", p[i].start, p[i].end);
+	  pthread_create(&h[i],NULL,func,&p[i]);
+     }
+
+     for(int i = 0; i < t; i++) pthread_join(h[i], NULL);
+     
+     double res = 0.0;
+     for(int i = 0; i < t; i++){
+	  res += p[i].res;
+     }     
+     printf("posix leubniz: %30.32f (d=%30.32f)\n", res*4.0, PI - res*4.0);
      
      clock_gettime(CLOCK_REALTIME, &end);
      printf("in %fs\n", (end.tv_sec - start.tv_sec)
@@ -134,13 +190,12 @@ void task8 (unsigned int n) {
      clock_gettime(CLOCK_REALTIME, &start);
      
      double res = 0.0;
-     double step = 1.0/(double)n;
 #pragma omp parallel for reduction(+:res) num_threads(4)
      for(unsigned int i = 0; i < n; i++){
-	  double x = step * i;
-	  res += (4.0 * step) / (1.0 + x * x);  
+
+	  res += 1.0 / (2 * i + 1) * (i % 2 ? -1 : 1);  
      }
-     printf("OMP integral(4/(1+x^2)): %30.32f\n", res);
+     printf("OMP leubniz: %30.32f (d=%2.32f)\n", res*4.0, PI - res*4.0);
      
      clock_gettime(CLOCK_REALTIME, &end);
      printf("in %fs\n", (end.tv_sec - start.tv_sec)
@@ -157,6 +212,8 @@ int main (int argc, char *argv[]) {
      task3(n);
      task6(n);
      task8(n);
+     task6_old(n);
+     task8_old(n);
      printf("END");
 }
 /*

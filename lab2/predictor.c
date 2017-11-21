@@ -8,13 +8,6 @@ typedef enum { false, true } bool;
 
 typedef enum { lo, hi } bit;
 
-typedef enum Counter {
-     OO,
-     OI,
-     IO,
-     II
-} counter;
-
 int incCounter(int c, int m){
      return c + (c != m);
 }
