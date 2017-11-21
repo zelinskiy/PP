@@ -11,12 +11,54 @@
 #include <pmmintrin.h>
 #include <immintrin.h>
 
+#define N 4096*4096*2
+
 //https://software.intel.com/sites/landingpage/IntrinsicsGuide
 
 void arrays_equal(int* a, int* b, int n){     
      for(int i = 0; i<n; i++){
 	  if(a[i] != b[i]) {
 	       printf("%d != %d at %d\n ", a[i], b[i], i);
+	       return;
+	  }	  
+     }
+     printf("arrays equal\n");	 
+}
+
+void arrays_equal_i8(int8_t* a, int8_t* b, int n){     
+     for(int i = 0; i<n; i++){
+	  if(a[i] != b[i]) {
+	       printf("%d != %d at %d\n ", a[i], b[i], i);
+	       return;
+	  }	  
+     }
+     printf("arrays equal\n");	 
+}
+
+void arrays_equal_i16(int16_t* a, int16_t* b, int n){     
+     for(int i = 0; i<n; i++){
+	  if(a[i] != b[i]) {
+	       printf("%d != %d at %d\n ", a[i], b[i], i);
+	       return;
+	  }	  
+     }
+     printf("arrays equal\n");	 
+}
+
+void arrays_equal_float(float* a, float* b, int n){     
+     for(int i = 0; i<n; i++){
+	  if(a[i] != b[i]) {
+	       printf("%f != %f at %d\n ", a[i], b[i], i);
+	       return;
+	  }	  
+     }
+     printf("arrays equal\n");	 
+}
+
+void arrays_equal_double(double* a, double* b, int n){     
+     for(int i = 0; i<n; i++){
+	  if(a[i] != b[i]) {
+	       printf("%f != %f at %d\n ", a[i], b[i], i);
 	       return;
 	  }	  
      }
@@ -188,7 +230,7 @@ void task2_d_sse(double* a, double* b, double* c, int n){
 
 void task2(){
      printf("TASK 2\n");
-     int n = 4096 * 4096;
+     int n = N;
      struct timespec start, end;
 
      // 8i
@@ -207,11 +249,15 @@ void task2(){
      printf("8 bit in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
 
+     int8_t* c8n = aligned_alloc(32,n*sizeof(int8_t));
+     
      clock_gettime(CLOCK_REALTIME, &start);
-     task2_i8_avx(a8, b8, c8, n);
+     task2_i8_avx(a8, b8, c8n, n);
      clock_gettime(CLOCK_REALTIME, &end);     
      printf("8 bit avx in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
+
+     arrays_equal_i8(c8, c8n, n);
      
      free(a8);free(b8);free(c8);
 
@@ -231,11 +277,15 @@ void task2(){
      printf("16 bit in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
 
+     int16_t* c16n = aligned_alloc(32,n*sizeof(int16_t));
+     
      clock_gettime(CLOCK_REALTIME, &start);
-     task2_i16_avx(a16, b16, c16, n);
+     task2_i16_avx(a16, b16, c16n, n);
      clock_gettime(CLOCK_REALTIME, &end);     
      printf("16 bit avx in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
+
+     arrays_equal_i16(c16, c16n, n);
      
      free(a16);free(b16);free(c16);
 
@@ -255,12 +305,14 @@ void task2(){
      printf("32 bit in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
 
+     int32_t* c32n = aligned_alloc(32,n*sizeof(int32_t));
      clock_gettime(CLOCK_REALTIME, &start);
-     task2_i32_avx(a32, b32, c32, n);
+     task2_i32_avx(a32, b32, c32n, n);
      clock_gettime(CLOCK_REALTIME, &end);     
      printf("32 bit avx in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
-     
+
+     arrays_equal(c32, c32n, n);
      
      free(a32);free(b32);free(c32);
 
@@ -308,12 +360,14 @@ void task2(){
      printf("float in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
 
+     float* cfn = aligned_alloc(32,n*sizeof(float));
+     
      clock_gettime(CLOCK_REALTIME, &start);
-     task2_f_sse(af, bf, cf, n);
+     task2_f_sse(af, bf, cfn, n);
      clock_gettime(CLOCK_REALTIME, &end);     
      printf("float sse in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
-     
+     arrays_equal_float(cf, cfn, n);
      free(af);free(bf);free(cf);
 
      // double
@@ -335,12 +389,15 @@ void task2(){
      printf("double in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
 
+     double* cdn = aligned_alloc(32,n*sizeof(double));
+     
      clock_gettime(CLOCK_REALTIME, &start);
-     task2_d_sse(ad, bd, cd, n);
+     task2_d_sse(ad, bd, cdn, n);
      clock_gettime(CLOCK_REALTIME, &end);     
      printf("double sse in %fs\n", (end.tv_sec - start.tv_sec)
 	    + (end.tv_nsec - start.tv_nsec) / 1e9);
      
+     arrays_equal_double(cd, cdn, n);
      
      free(ad);free(bd);free(cd);
 }
@@ -370,15 +427,7 @@ void print_array_float(float* a, int n){
      printf("\n");	 
 }
 
-void arrays_equal_float(float* a, float* b, int n){     
-     for(int i = 0; i<n; i++){
-	  if(a[i] != b[i]) {
-	       printf("%f != %f at %d\n ", a[i], b[i], i);
-	       return;
-	  }	  
-     }
-     printf("arrays equal\n");	 
-}
+
 
 void sqrt_float(
      float* x,
@@ -470,7 +519,7 @@ void sqrt_double_avx(
 
 void task6(){
      printf("TASK 6\n");
-     int n = 4096 * 4096;
+     int n = N;
      struct timespec start, end;
 
      // float
@@ -597,7 +646,7 @@ void mult_SSE(complex* x, complex* y, complex *z, int n)
 
 void task8(){
      printf("TASK 8\n");
-     int n = 4096 * 4096;
+     int n = N;
      struct timespec start, end;
 
      complex* x = calloc(n, sizeof(complex));
@@ -663,8 +712,8 @@ void shiftSSE(int32_t* a, int32_t* b, int size){
 
 
 void task9(){
-  printf("TASK 2\n");
-  int n = 4e7;
+  printf("TASK 9\n");
+  int n = N;
   struct timespec start, end;
 
   int32_t* a32 = aligned_alloc(32,n*sizeof(int32_t));
