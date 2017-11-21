@@ -152,7 +152,7 @@ void task8 (unsigned int n) {
 int main (int argc, char *argv[]) {
      printf("BEGIN\n");
      const unsigned int n = 1e9;
-     ask1();
+     task1();
      task2();
      task3(n);
      task6(n);

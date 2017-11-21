@@ -23,8 +23,7 @@ int decCounter(int c){
      return c - (c != 0);
 }
 
-int bitsToInt(bit arr[], int count)
-{
+int bitsToInt(bit arr[], int count){
     int ret = 0;
     int tmp;
     for (int i = 0; i < count; i++) {
@@ -56,9 +55,9 @@ int main (int argc, char *argv[]){
      srand(time(NULL));
      
      const int n = 2;
-     const int k = 1;
-     const int s = 50;
-     const int t_prob = 20;
+     const int k = 2;
+     const int s = 1024;
+     const int t_prob = 10;
      
      bit* story = calloc(s, sizeof(bit));
      for(int i = 0; i < s; i++){
@@ -76,18 +75,22 @@ int main (int argc, char *argv[]){
 
      for(int i = 0; i < s; i++){
 	  prev_i = bitsToInt(prev, n);
-	  exp = table[prev_i] < k/2;
+	  exp = table[prev_i] > k/2;
 	  real = story[i];	  	  
-	  if(exp == real){
-	       table[prev_i] = decCounter(table[prev_i]);
-	       printf("[O] exp = %d, real = %d, dec %s(%d)\n",
-		      exp, real, string_array(prev, n), prev_i);
+	  if(exp == real){	       
+	       printf("[O] exp = %d, real = %d\n", exp, real);
 	       good++;
 	  }
 	  else {
-	       table[prev_i] = incCounter(table[prev_i], k);
-	       printf("[E] exp = %d, real = %d, inc %s(%d)\n",
-		      exp, real, string_array(prev, n), prev_i);
+	       printf("[E] exp = %d, real = %d, ", exp, real);
+	       if(exp && !real){
+		    printf("dec %s(%d)\n", string_array(prev, n), prev_i);
+		    table[prev_i] = decCounter(table[prev_i]);
+	       }
+	       if(!exp && real){
+		    printf("inc %s(%d)\n", string_array(prev, n), prev_i);
+		    table[prev_i] = incCounter(table[prev_i], k);
+	       }
 	       bad++;
 	  }
 	  for(int i = 1; i < n; i++){
